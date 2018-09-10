@@ -7,6 +7,4 @@ class ProductSerializer
       url: object.preview.url
     }
   end
-
-  has_many :images, serializer: ImageSerializer
 end
