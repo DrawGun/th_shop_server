@@ -9,11 +9,56 @@
 puts 'Create products'
 
 COLORS = {
-  blue: 'This is blue',
-  dark: 'This is dark',
-  green: 'This is green',
-  red: 'This is red',
-  yellow: 'This is yellow'
+  blue: {
+    title: {
+      ru: 'синий',
+      en: 'blue'
+    },
+    description: {
+      ru: 'Это синий цвет',
+      en: 'This is blue'
+    }
+  },
+  dark: {
+    title: {
+      ru: 'черный',
+      en: 'dark'
+    },
+    description: {
+      ru: 'Это черный цвет',
+      en: 'This is dark'
+    }
+  },
+  green: {
+    title: {
+      ru: 'зеленый',
+      en: 'green'
+    },
+    description: {
+      ru: 'Это зеленый цвет',
+      en: 'This is green'
+    }
+  },
+  red: {
+    title: {
+      ru: 'красный',
+      en: 'red'
+    },
+    description: {
+      ru: 'Это красный цвет',
+      en: 'This is red'
+    }
+  },
+  yellow: {
+    title: {
+      ru: 'желтый',
+      en: 'yellow'
+    },
+    description: {
+      ru: 'Это желтый цвет',
+      en: 'This is yellow'
+    }
+  }
 }
 
 COLORS.keys.each do |color|
@@ -22,13 +67,23 @@ COLORS.keys.each do |color|
   preview_path = Rails.root.join('public', 'colors', "#{color}", 'preview.png')
   preview_file = File.open(preview_path)
 
-  product = Product.create!(
-    title: color.capitalize,
-    description: COLORS[color].capitalize,
+  product = Product.new(
     preview: preview_file,
     price_cents: rand(1000..10000),
     price_currency: %w(RUB USD EUR).sample
   )
+
+  color_hash = COLORS[color]
+
+  color_hash[:title].each do |lang, value|
+    product["title_#{lang}"] = value.capitalize
+  end
+
+  color_hash[:description].each do |lang, value|
+    product["description_#{lang}"] = value
+  end
+
+  product.save
 
   5.times do |time|
     filename = "#{time + 1}.png"

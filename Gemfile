@@ -71,3 +71,5 @@ gem 'money'
 
 gem 'grape'
 gem 'grape_fast_jsonapi'
+gem 'api-pagination'
+gem 'will_paginate'

@@ -3,7 +3,7 @@ ActiveAdmin.register Product do
   index do
     extend AdminTablesExtras
 
-    column :title
+    column :title_ru
     money_column :price
     image_column :preview, width: 100
 
@@ -14,7 +14,7 @@ ActiveAdmin.register Product do
     extend AdminTablesExtras
 
     attributes_table do
-      row :title
+      row :title_ru
       money_row :price
       image_row :preview, width: 100
     end
@@ -24,7 +24,10 @@ ActiveAdmin.register Product do
     extend AdminTablesExtras
 
     f.inputs do
-      f.input :title
+      f.input :title_ru
+      f.input :title_en
+      f.input :description_ru
+      f.input :description_en
       f.input :price
       f.input :price_currency,
         as: :select,
@@ -43,7 +46,7 @@ ActiveAdmin.register Product do
     f.actions
   end
 
-  filter :title
+  filter :title_ru
 
-  permit_params :title, :preview, :preview_cache, :remove_preview, :price_cents, :price_currency
+  permit_params :title_ru, :title_en, :description_ru, :description_en, :preview, :preview_cache, :remove_preview, :price_cents, :price_currency
 end

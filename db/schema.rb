@@ -37,8 +37,10 @@ ActiveRecord::Schema.define(version: 20180829130635) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
+    t.string "title_ru"
+    t.string "title_en"
+    t.text "description_ru"
+    t.text "description_en"
     t.string "preview"
     t.integer "price_cents", default: 0, null: false
     t.string "price_currency", default: "RUB", null: false
