@@ -13,5 +13,6 @@ class API < Grape::API
     mount V1::ProductsAPI
     mount V1::GalleryAPI
     mount V1::ImagesAPI
+    mount V1::OrdersAPI
   end
 end
